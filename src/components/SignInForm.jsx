@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function SignInForm() {
   return (
     <form>
@@ -13,9 +15,9 @@ export default function SignInForm() {
         <input type="checkbox" id="remember-me" />
         <label htmlFor="remember-me">Remember me</label>
       </div>
-      <a href="/user" className="sign-in-button">
+      <Link className="sign-in-button" to="/user">
         Sign In
-      </a>
+      </Link>
     </form>
   );
 }
