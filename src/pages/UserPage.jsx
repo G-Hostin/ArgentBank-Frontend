@@ -1,12 +1,15 @@
 import AccountCard from "../components/AccountCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import EditUsernameForm from "../components/EditUsernameForm";
 
 export default function UserPage() {
   const token = useSelector((state) => state.user.token);
   const profile = useSelector((state) => state.user.profile);
   const navigate = useNavigate();
+
+  const [editing, setEditing] = useState(false); // state local pour l'affichage du editform
 
   useEffect(() => {
     // si pas de token --> redirection auto
@@ -22,13 +25,23 @@ export default function UserPage() {
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>
-          Welcome back
-          <br />
-          {profile.userName}
-          {/* {profile.firstName} {profile.lastName} */}
-        </h1>
-        <button className="edit-button">Edit Name</button>
+        {!editing ? (
+          <>
+            <h1>
+              Welcome back
+              <br />
+              {profile.userName}
+            </h1>
+            <button className="edit-button" onClick={() => setEditing(true)}>
+              Edit Name
+            </button>
+          </>
+        ) : (
+          <>
+            <h1>Edit User Info</h1>
+            <EditUsernameForm onCancel={() => setEditing(false)} />
+          </>
+        )}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <AccountCard

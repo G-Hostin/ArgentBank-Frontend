@@ -259,12 +259,85 @@ body {
   flex: 1;
 }
 
+/* FORM EDIT USER NAME */
+
 .edit-button {
   border-color: #00bc77;
   background-color: #00bc77;
-  color: #fff;
+  color: #ffffff;
   font-weight: bold;
   padding: 10px;
+  margin-right: 0.5rem;
+}
+
+.edit-username-form {
+  width: 320px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem 2rem 1rem 2rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input-row label {
+  width: 90px;
+  text-align: left;
+  font-weight: 500;
+  color: #222222;
+  font-size: 1rem;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 7px 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+}
+
+.input-row input:disabled {
+  background: #eee;
+  color: #888;
+  font-style: italic;
+}
+
+.form-btn-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.edit-button {
+  border: none;
+  background: #00bc77;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 8px 18px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background: #008c5e;
+}
+
+.error-msg {
+  color: #d32f2f;
+  font-size: 1rem;
+  margin-top: 0.6rem;
+  display: block;
+  text-align: right;
 }
 
 .header {

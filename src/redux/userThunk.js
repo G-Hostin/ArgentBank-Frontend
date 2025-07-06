@@ -34,3 +34,23 @@ export const loginUser = createAsyncThunk(
     return { token: data.body.token, profile: profileInfoData.body }; // retourne le payload --> token et les infos profile (utilisé par reducer pour màj le state) = fulfilled
   }
 );
+
+export const editUsername = createAsyncThunk(
+  "user/editUsername",
+  async ({ token, userName }, thunkAPI) => {
+    const response = await fetch("http://localhost:3001/api/v1/user/profile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ userName }),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      return thunkAPI.rejectWithValue(data.message);
+    }
+
+    return data.body;
+  }
+);

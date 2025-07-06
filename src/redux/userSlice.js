@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser } from "./userThunk";
+import { loginUser, editUsername } from "./userThunk";
 
 const initialState = {
   token: null, // token authentification
@@ -39,6 +39,13 @@ const userSlice = createSlice({
         // lorsque le login echoue --> stop chargement + stocke le msg d'erreur dans le state (pour l'afficher)
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(editUsername.fulfilled, (state, action) => {
+        state.profile = { ...state.profile, ...action.payload }; // spread des anciennes donnees dans profile et ecrase avec le nouvel userName de action.payload
+        // state.profile = action.payload; possible mais par prudence on spread les anciennes données
+      })
+      .addCase(editUsername.rejected, (state, action) => {
+        state.error = action.payload; // recupere le msg d'erreur de thunkAPI.rejectedWithValue
       });
   },
 });
