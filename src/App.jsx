@@ -11,8 +11,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/user" element={<UserPage />} />
+        <Route path="/login" element={<SignInPage />} />
+        <Route path="/profile" element={<UserPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

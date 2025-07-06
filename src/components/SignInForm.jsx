@@ -18,11 +18,10 @@ export default function SignInForm() {
   // fonction submit form
   const handleSubmit = (e) => {
     e.preventDefault();
-    //err
     dispatch(loginUser({ email, password }))
       .unwrap()
       .then(() => {
-        navigate("/user");
+        navigate("/profile");
       });
   };
 

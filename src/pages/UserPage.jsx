@@ -1,13 +1,31 @@
 import AccountCard from "../components/AccountCard";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function UserPage() {
+  const token = useSelector((state) => state.user.token);
+  const profile = useSelector((state) => state.user.profile);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // si pas de token --> redirection auto
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token, navigate]);
+
+  if (!profile) {
+    return <div>Chargement...</div>;
+  } // verif profile pour eviter les erreurs
+
   return (
     <main className="main bg-dark">
       <div className="header">
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+          {profile.firstName} {profile.lastName}
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>
