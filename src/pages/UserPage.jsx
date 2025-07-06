@@ -11,7 +11,7 @@ export default function UserPage() {
   useEffect(() => {
     // si pas de token --> redirection auto
     if (!token) {
-      navigate("/login");
+      navigate("/");
     }
   }, [token, navigate]);
 
@@ -25,7 +25,8 @@ export default function UserPage() {
         <h1>
           Welcome back
           <br />
-          {profile.firstName} {profile.lastName}
+          {profile.userName}
+          {/* {profile.firstName} {profile.lastName} */}
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>
