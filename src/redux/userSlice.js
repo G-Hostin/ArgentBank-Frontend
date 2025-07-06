@@ -18,6 +18,8 @@ const userSlice = createSlice({
       state.profile = null;
       state.isLoading = false;
       state.error = null;
+      localStorage.removeItem("authToken");
+      sessionStorage.removeItem("authToken");
     }, // lorsquon appelle dispatch(logout()) ça remet tout le state à 0 pour le déco
   },
   extraReducers: (builder) => {

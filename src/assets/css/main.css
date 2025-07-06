@@ -60,6 +60,10 @@ body {
   margin-right: 0.5rem;
 }
 
+.fa-user-circle {
+  margin-right: 0.3rem;
+}
+
 .main-nav-item:hover {
   text-decoration: underline;
 }
