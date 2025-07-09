@@ -54,3 +54,21 @@ export const editUsername = createAsyncThunk(
     return data.body;
   }
 );
+
+export const fetchProfile = createAsyncThunk(
+  "user/fetchProfile",
+  async (token, thunkAPI) => {
+    const response = await fetch("http://localhost:3001/api/v1/user/profile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      return thunkAPI.rejectWithValue(data.message);
+    }
+    return data.body;
+  }
+);

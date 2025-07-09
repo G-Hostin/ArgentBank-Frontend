@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, editUsername } from "./userThunk";
+import { loginUser, editUsername, fetchProfile } from "./userThunk";
 
 const initialState = {
   token: null, // token authentification
@@ -19,6 +19,9 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.error = null;
     }, // lorsquon appelle dispatch(logout()) ça remet tout le state à 0 pour le déco
+    setToken(state, action) {
+      state.token = action.payload;
+    },
   },
   extraReducers: (builder) => {
     // reactions aux actions async (comme loginUser)
@@ -46,9 +49,18 @@ const userSlice = createSlice({
       })
       .addCase(editUsername.rejected, (state, action) => {
         state.error = action.payload; // recupere le msg d'erreur de thunkAPI.rejectedWithValue
+      })
+      .addCase(fetchProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchProfile.fulfilled, (state, action) => {
+        state.profile = action.payload;
+        state.isLoading = false;
+        state.error = null;
       });
   },
 });
 
-export const { logout } = userSlice.actions; // export pour pouvoir utiliser logout partout comme action
+export const { logout, setToken } = userSlice.actions; // export pour pouvoir utiliser logout partout comme action
 export default userSlice.reducer; // export du reducer pour qu'il soit branché dans le storer

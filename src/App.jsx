@@ -4,18 +4,21 @@ import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import UserPage from "./pages/UserPage";
+import AuthTokenProvider from "./components/AuthTokenProvider";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<SignInPage />} />
-        <Route path="/profile" element={<UserPage />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <AuthTokenProvider>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<SignInPage />} />
+          <Route path="/profile" element={<UserPage />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </AuthTokenProvider>
   );
 }
 

@@ -10,6 +10,7 @@ export default function SignInForm() {
   // state local pour les inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   // state Redux pour loading et error
   const error = useSelector((state) => state.user.error);
@@ -21,7 +22,10 @@ export default function SignInForm() {
 
     dispatch(loginUser({ email, password }))
       .unwrap()
-      .then(() => {
+      .then((token) => {
+        if (rememberMe) {
+          sessionStorage.setItem("authToken", token.token);
+        }
         navigate("/profile");
       });
   };
@@ -47,7 +51,12 @@ export default function SignInForm() {
         />
       </div>
       <div className="input-remember">
-        <input type="checkbox" id="remember-me" />
+        <input
+          type="checkbox"
+          id="remember-me"
+          checked={rememberMe}
+          onChange={(e) => setRememberMe(e.target.checked)}
+        />
         <label htmlFor="remember-me">Remember me</label>
       </div>
       <button type="submit" className="sign-in-button" disabled={isLoading}>
